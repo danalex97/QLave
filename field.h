@@ -5,6 +5,10 @@
 #include <stdexcept>
 using namespace std;
 
+/**
+ * The data kept in table entries. It can keep 3 types: integer, real or text.
+**/
+
 /** INTEGER types:
 	- SHORT
 	- INT

@@ -3,29 +3,57 @@
 
 #include <vector>
 
-#ifndef FIELD_H
 #include "field.h"
-#endif
+#include "selectors.h"
 
 using namespace std;
 
-enum Comp { 
+enum CompOp { 
 	GT, 
 	LT,
 	EQ 
 };
 
-struct Comparison {
-	Field f1, f2;
-	Comp comp;
-	bool neg;
+class Comp {
+	private:
+		Selector lhs, rhs;
+		CompOp comp;
+	public:
+		Comp(char* str);
 };
 
-class Condition {
-private:
-	vector<Comparison> cond;
-	
-public:
+enum LogicOp { 
+	NOT, 
+	AND,
+	OR 
+};
+
+class In {
+	private:
+		Selector lhs;
+		Table rhs;
+	public:
+		In(char* str);
+};
+
+/**
+ * Predicates:
+ *  - evaluates to true or false for each entry
+ *
+ * Supported operations:
+ *  - s1 <= s2 (>, etc)
+ *  - s1 in t1
+ *  - s1 like pattern   - not implemented
+**/
+class Pred {
+	private:
+		Pred *lhs, *rhs;
+		LogicOp op;
+
+		Comp comp;
+		In   in;
+	public:
+		Pred(char* str);
 };
 
 #endif 
