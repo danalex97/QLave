@@ -20,12 +20,28 @@ string charUtils :: getName(char*& str) {
 	return out;
 }
 
+char* charUtils :: allocString(string from) {
+	char *input = (char*) malloc (from.length()+1);
+	for (size_t i = 0; i < from.size(); ++i) {
+		*(input + i) = from[i];
+	}
+	return input;
+}
+
+Selector :: Selector(string str) {
+	name = str;
+}
+
 Selector :: Selector(char*& str) {
 	name = charUtils :: getName(str);
 }
 
 Table :: Table(char*& str) {
 	name = charUtils :: getName(str);
+}
+
+Table :: Table(string str) {
+	name = str;
 }
 
 string Selector :: getName() {
@@ -36,31 +52,21 @@ string Table :: getName() {
 	return name;
 }
 
+void  tests_selector :: test1() {
+	char *input = charUtils :: allocString("  nume  ");
 
-namespace tests {
-	void test1() {
-		const char* from = "  nume  ";
+	char *input1 = input;
+	char *input2 = input;
 
-		char *input = (char*) malloc (strlen(from)+1);
-		memcpy (input, from, sizeof(from));
-
-		char *input1 = input;
-		char *input2 = input;
-
-		Selector sel1 = Selector(input);
-		Table    sel2 = Table(input2);
-		if (sel1.getName() != "nume" || sel2.getName() != "nume") {
-			cerr << "Test 1 failed." << '\n';
-		} else {
-			cerr << "Test 1 passed." << '\n';
-		}
+	Selector sel1 = Selector(input);
+	Table    sel2 = Table(input2);
+	if (sel1.getName() != "nume" || sel2.getName() != "nume") {
+		cerr << "Test 1 failed." << '\n';
+	} else {
+		cerr << "Test 1 passed." << '\n';
 	}
+}
 	
-	void run() {
-		test1();
-	}
-};
-
-int main() {
-	tests :: run();
+void tests_selector :: run() {
+	test1();
 }

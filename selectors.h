@@ -14,6 +14,7 @@ using namespace std;
 namespace charUtils {
 	bool isSpace(char chr);
 	string getName(char*& str);
+	char* allocString(string from);
 };
 
 class Selector { 
@@ -21,6 +22,7 @@ class Selector {
 		string name;
 	public:
 		Selector(char*& str);
+		Selector(string selector);
 		string getName();
 };
 
@@ -29,7 +31,13 @@ class Table {
 		string name;
 	public:
 		Table(char*& str);
+		Table(string selector);
 		string getName();
+};
+
+namespace tests_selector{
+	void test1();
+	void run();
 };
 
 #endif 

@@ -10,16 +10,19 @@ using namespace std;
 
 enum CompOp { 
 	GT, 
+	GE,
+	LE,
 	LT,
 	EQ 
 };
 
 class Comp {
 	private:
-		Selector lhs, rhs;
-		CompOp comp;
+		Selector *lhs, *rhs;
+		CompOp   comp;
 	public:
-		Comp(char* str);
+		Comp(char*& str);
+		Comp(Selector* selector);
 };
 
 enum LogicOp { 
@@ -30,10 +33,10 @@ enum LogicOp {
 
 class In {
 	private:
-		Selector lhs;
-		Table rhs;
+		Selector *lhs;
+		Table    *rhs;
 	public:
-		In(char* str);
+		In(char*& str);
 };
 
 /**
@@ -50,10 +53,16 @@ class Pred {
 		Pred *lhs, *rhs;
 		LogicOp op;
 
-		Comp comp;
-		In   in;
+		Comp *comp;
+		In   *in;
 	public:
-		Pred(char* str);
+		Pred();
+		Pred(char*& str);
+		Pred* term(char*& str);
+};
+
+namespace tests_comp {
+	void run();
 };
 
 #endif 
