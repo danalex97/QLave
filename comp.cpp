@@ -15,6 +15,16 @@ map<string, LogicOp> logic_map = {
 	{"AND", AND}
 };
 
+template<class S, class T> map<T, S> reverseMap(map<S, T> mp) {
+	map<T, S> mp2 = new map<T, S>();
+	for (auto t : mp) {
+		mp2.insert(t.second, t.first);
+	}
+	return mp2;
+}
+
+map<LogicOp, string> rev_logic_map = reverseMap<LogicOp, string>(logic_map);
+
 /**
  * No validator implemented.
  * NOT - not yet supported.
@@ -86,6 +96,13 @@ Pred :: Pred(char*& str) {
 }
 
 Pred :: Pred() {
+}
+
+string Pred :: toString() {
+	if (this == nullptr) {
+		return "";
+	}
+	return lhs->toString() +  + rhs->toString();
 }
 
 void tests_comp :: run() {
