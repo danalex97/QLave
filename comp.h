@@ -23,6 +23,7 @@ class Comp {
 	public:
 		Comp(char*& str);
 		Comp(Selector* selector);
+		string toString();
 };
 
 enum LogicOp { 
@@ -37,6 +38,7 @@ class In {
 		Table    *rhs;
 	public:
 		In(char*& str);
+		string toString();
 };
 
 /**
@@ -59,9 +61,11 @@ class Pred {
 		Pred();
 		Pred(char*& str);
 		Pred* term(char*& str);
+		string toString();
 };
 
 namespace tests_comp {
+	void test(string idx, string input, string ans);
 	void run();
 };
 

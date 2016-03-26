@@ -5,15 +5,21 @@ bool charUtils :: isSpace(char chr) {
 	return chr == ' ' || chr == '\t';
 }
 
+bool charUtils :: isAlphaNum(char chr) {
+	return (chr >= '0' && chr <= '9') 
+		|| (chr >= 'a' && chr <= 'z') 
+		|| (chr >= 'A' && chr <= 'Z');
+}
+
 string charUtils :: getName(char*& str) {
 	string out = "";
 	while (isSpace(*str)) {
 		++str;
 	}
 	if (*str == 0) {
-		throw invalid_argument("Received null value on parsing.");
+		return "";
 	}
-	while (!isSpace(*str)) {
+	while (!isSpace(*str) && *str != 0 && *str != ')') {
 		out += *str;
 		++str;
 	}

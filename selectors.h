@@ -13,6 +13,7 @@ using namespace std;
 
 namespace charUtils {
 	bool isSpace(char chr);
+	bool isAlphaNum(char chr);
 	string getName(char*& str);
 	char* allocString(string from);
 };
