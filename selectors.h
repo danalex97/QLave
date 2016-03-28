@@ -16,6 +16,7 @@ namespace charUtils {
 	bool isAlphaNum(char chr);
 	string getName(char*& str);
 	char* allocString(string from);
+	string splitAt(char chr, char*& str);
 };
 
 class Selector { 

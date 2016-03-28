@@ -11,6 +11,18 @@ bool charUtils :: isAlphaNum(char chr) {
 		|| (chr >= 'A' && chr <= 'Z');
 }
 
+string charUtils :: splitAt(char chr, char*& str) {
+	string ans = "";
+	while (isSpace(*str)) {
+		++str;
+	}
+	while (*str != 0 && *str != chr) {
+		ans += *str;
+		++str;
+	}
+	return ans;
+}
+
 string charUtils :: getName(char*& str) {
 	string out = "";
 	while (isSpace(*str)) {

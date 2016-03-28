@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <stdexcept>
+#include <map>
 using namespace std;
 
 /**
@@ -66,7 +67,25 @@ template <> struct Type<double> : public Real<double> { using Real<double> :: Re
 
 template <> struct Type<char> : public Text<char> { using Text<char> :: Text; };
 
-struct Field {
+namespace field_tests {
+	template<class T, class S> struct TestBuilder {
+		string out;
+		S expected;
+		string idx;
+		bool has_result;
+
+		TestBuilder(string idx, string out);
+		TestBuilder(string idx, string out, S expected);
+		void run();
+	};
+	void run();
+	void type_infer_tests();
+};
+
+namespace infer_type {
+	const string TYPES[6] = {"INT", "SHORT", "LONG", "FLOAT", "DOUBLE", "VARCHAR"};
+	void* infer_type(string str, string input); 
+	bool can_infer(string str);
 };
 
 #endif 
