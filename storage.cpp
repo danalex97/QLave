@@ -114,8 +114,3 @@ void storage_tests :: test_database_append() {
 void storage_tests :: run() {
 	test_database_append();
 }
-
-int main() {
-	field_tests :: run();
-	storage_tests :: run();
-}

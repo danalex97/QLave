@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "storage.h"
 
 Parser :: Parser(int mode) {
 	switch (mode) {
@@ -128,15 +129,54 @@ void Parser :: run() {
 	}
 }
 
-void Parser :: parse(string line) {
-	cerr << line << '\n';
+/****************** COMMANDS *********************
+
+THE INITIAL VERSION WILL NOT ACCEPT SPECIAL WORDS SEPARATELY.
+TO DO: 
+	* MULTIPLE RAW READING.
+	* CASE INSENSITIVE
+
+Creation:
+	CREATE DATABASE test;
+	USE database;
+	CREATE TABLE table_name
+	(
+	column_name1 data_type(size),
+	column_name2 data_type(size),
+	column_name3 data_type(size),
+	....
+	);
+
+Update:
+	INSERT INTO table_name VALUES (value1,value2,value3,...);
+	UPDATE table_name SET column1=value1,column2=value2,... WHERE some_column=some_value;
+	DELETE FROM table_name WHERE some_column=some_value;
+
+Querys:
+	SELECT column_name,column_name FROM table_name;
+	SELECT DISTINCT column_name,column_name FROM table_name;
+	SELECT column_name,column_name FROM table_name WHERE column_name operator value;
+	SELECT * FROM Customers ORDER BY Country; 
+	SELECT column_name(s) FROM table_name LIMIT number;
+	SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;
+	SELECT column_name(s) FROM table_name WHERE column_name IN (@column);
+
+Query composition:
+	(SELECT column_name(s) FROM table1) UNION (SELECT column_name(s) FROM table2);
+	SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate FROM Orders INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; 
+	SELECT Customers.CustomerName, Orders.OrderID INTO CustomersOrderBackup2013 FROM Customers LEFT JOIN Orders ON Customers.CustomerID=Orders.CustomerID;
+
+**************************************************/
+
+void Parser :: parse(string raw_data) {
+	cerr << raw_data << '\n';
 }
 
 string* Parser :: read_line() {
 	try {
 		switch (mode) {
-			case STDINP:
-				cin >> line;
+			case STDINP:        /////////////////// reads just a word
+				cin >> line; 
 				cout << line << '\n';
 				break;
 			case STREAM:
@@ -199,5 +239,7 @@ void Tests :: run() {
 }
 
 int main() {
+	//field_tests :: run();
+	//storage_tests :: run();
 	Tests :: run();
 }
