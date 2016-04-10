@@ -13,7 +13,8 @@ namespace Tests {
 	
 	vector<string> TEST[TESTS] = {
 		{
-			"CREATE DATABASE test;",
+			"CREATE"
+			" DATABASE test;",
 			"USE test;"
 		}
 	};
@@ -28,10 +29,15 @@ class Parser {
 		ifstream *file_in;
 		int vector_cursor;
 		int mode;
+		
 		string line;
+		string query;
+		string acc;
+
 		vector<string> lines;
 
 		const char* STDINP_FILE = "parser.in";
+		bool multi_line(string raw_data);
 	public:
 		static const int STDINP = 0;
 		static const int STREAM = 1;

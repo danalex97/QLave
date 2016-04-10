@@ -133,7 +133,7 @@ void Parser :: run() {
 
 THE INITIAL VERSION WILL NOT ACCEPT SPECIAL WORDS SEPARATELY.
 TO DO: 
-	* MULTIPLE RAW READING.
+	* MULTIPLE RAW READING. (fixed)
 	* CASE INSENSITIVE
 
 Creation:
@@ -168,8 +168,29 @@ Query composition:
 
 **************************************************/
 
+bool Parser :: multi_line(string raw_data) {
+	bool flag = false;
+	for (auto c : raw_data) {
+		if (c == ';') {
+			query = acc;
+			acc = "";
+			flag = true;
+		} else {
+			if (c != '\n') {
+				acc += c;
+			}
+		}
+	}
+	return flag;
+}
+
 void Parser :: parse(string raw_data) {
-	cerr << raw_data << '\n';
+	bool flag = multi_line(raw_data);
+	if (flag) {
+		cerr << query << '\n';
+
+		/// TO PROCESS QUERY
+	}
 }
 
 string* Parser :: read_line() {
